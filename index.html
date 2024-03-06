@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Special Birthday Surprise</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #5fffd4, #7bc3fe);
+            color: white;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .letterButton {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 20px;
+            color: white;
+            background-color: #ffe047;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.5s;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .letterButton:hover {
+            background-color: #00c3ff;
+        }
+
+        #birthdayMessage {
+            margin-top: 20px;
+            animation: fadeIn 2s;
+            display: none;
+            position: relative;
+            z-index: 2;
+        }
+
+        @keyframes fadeIn {
+            0% {opacity: 0;}
+            100% {opacity: 1;}
+        }
+
+        .emoji {
+            pointer-events: none;
+            position: absolute;
+            z-index: 1;
+            font-size: 30px;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% {
+                opacity: 1;
+                transform: translateY(-100%);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(100%);
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>A Birthday Card to Wendi 🎉</h1>
+    <p>选一个按钮来打开祝福 🎂</p>
+
+    <button class="letterButton" data-letter="A">A</button>
+    <button class="letterButton" data-letter="B">B</button>
+    <button class="letterButton" data-letter="C">C</button>
+    <button class="letterButton" data-letter="D">D</button>
+    <button class="letterButton" data-letter="E">E</button> <!-- This is the correct button -->
+    <button class="letterButton" data-letter="F">F</button>
+
+    <div id="birthdayMessage">
+        <h2>🎉🎉🎉 23岁生日快乐，小朋友! 🎉🎉🎉</h2>
+        <p>🎂 希望小朋友在新的一岁里开开心心 🎈</p>
+        <p>🎈 生活中充满爱、喜悦和阳光； 🌹</p>
+        <p>🥳 一切越来越好，每天吃蛋糕！ 🍰</p>
+    </div>
+
+    <script>
+        var buttons = document.getElementsByClassName('letterButton');
+        var emojis = ['🎉', '🎂', '🎈', '🌹', '🥳', '🍰', '⭐'];
+
+        for (var i = 0; i < buttons.length; i++) {
+            buttons[i].addEventListener('click', function() {
+                if (this.getAttribute('data-letter') === 'E') {
+                    document.getElementById('birthdayMessage').style.display = 'block';
+                }
+            });
+        }
+
+        function createEmoji() {
+            var emoji = document.createElement('div');
+            emoji.classList.add('emoji');
+            emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+            emoji.style.left = Math.random() * 100 + 'vw';
+            emoji.style.animationDuration = Math.random() * 2 + 2 + 's';
+            emoji.style.fontSize = Math.random() * 20 + 20 + 'px';
+            document.body.appendChild(emoji);
+
+            setTimeout(function() {
+                document.body.removeChild(emoji);
+            }, 4000);
+        }
+
+        setInterval(createEmoji, 200);
+    </script>
+</body>
+</html>
